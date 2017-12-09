@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Game</title>
+<link href="button.css" rel="stylesheet" type="text/css"/>
+<link href="animate.css" rel="stylesheet" type="text/css"/>
+<link href="annabelle.css" rel="stylesheet" type="text/css" />
+<style>
+   body 
+   { 
+	overflow: hidden;
+    background-image: url(bg.png); /* Путь к фоновому изображению */
+    background-color: #c7b39b; /* Цвет фона */
+	background-size: 100% 660px;
+	background-repeat: no-repeat;
+   }
+   #inscription
+   {
+	position: absolute;
+	left:430px;
+	width:40%;
+	height:146px;
+	text-align: center;
+	animation: fall 1s ease-out 1;	
+   }
+   @keyframes fall
+   {
+	from{
+		transform: translatey(-100px);
+	}
+	to{
+		transform: translatey(0px);
+	}
+	}
+	#lifes_1
+	{
+		position:absolute;
+		left:10px;
+		top:20px;
+		width:100px;
+	}
+	#lifes_2
+	{
+		position:absolute;
+		left:120px;
+		top:20px;
+		width:100px;
+	}
+	#lifes_3
+	{
+		position:absolute;
+		left:230px;
+		top:20px;
+		width:100px;
+	}
+	#sound_on
+	{
+		position:absolute;
+		top:1%;
+		right:10px;
+		width:70px;
+	}
+	#sound_off
+	{
+		position:absolute;
+		top:1%;
+		right:10px;
+		width:70px;
+		display:none;
+	}
+	#btn
+	{
+		position: absolute;
+		top: 400px;
+		left: 590px;
+	}
+	#result
+	{
+		position: absolute;
+		top: 220px;
+		left: 620px;
+		width: 150px;
+	}
+	#letter_1
+	{	
+		position: absolute;
+		top: 110px;
+		left: 100px;
+		text-align: center;
+		width:300px;
+	}
+	#letter_2
+	{	
+		position: absolute;
+		top: 110px;
+		right: 100px;
+		text-align: center;
+		width:300px;
+	}
+	#number_1
+	{	
+		position: absolute;
+		bottom: 10px;
+		left: 600px;
+		text-align: center;
+		height: 150px;
+		width: 80px;
+	}
+	#number_2
+	{	
+		position: absolute;
+		bottom: 10px;
+		right: 600px;
+		text-align: center;
+		height: 150px;
+		width: 80px;
+	}
+	#congratulations, #noworries
+	{
+		display: none;
+		padding: 0 1em;
+		font-family: 'Annabelle', arial;
+		background-color:#545254;
+		height:650px;
+		width:600px;
+		position:absolute;
+		top:5px;
+		left:390px;
+		text-align:center;
+	}
+	#message_1, #message_3
+	{
+		color:#fff;
+		font-size: 4em;
+		font-weight: 200;
+	}
+	#message_2, #message_4
+	{	
+		position: relative;
+		bottom:50px;
+		color:#fff;
+		font-size: 2em;
+		font-family: 'Annabelle', arial;
+	}
+	#tryagain
+	{
+		position: relative;
+		top:259px;
+	}
+	#ladder
+	{
+		position:absolute;
+		left:225px;
+	}
+  </style>
+</head>
+
+<body>
+
+<script>
+var r = 0, l = 0, correct = 0, incorrect = 0, n1, n2;
+function randomInteger(min, max) {
+		var rand = min - 0.5 + Math.random() * (max - min + 1)
+		rand = Math.round(rand);
+		return rand;
+	} 
+ 
+function twist()
+	{
+		document.getElementById('btn').onclick = null;
+		document.getElementById('letter_1').onclick = left;
+		document.getElementById('letter_2').onclick = right;
+		
+	
+		document.getElementById('letter_1').classList.add('rollOut');
+		document.getElementById('letter_2').classList.add('rollOut');
+		document.getElementById('result').classList.add('rollOut');
+		
+		setTimeout(function() { 
+			while(i==j)
+			{
+				var i = randomInteger(0, 32);
+				var j = randomInteger(0, 32);
+			}
+			l = 0, r = 0;
+			if ( i < j) l=1;
+			if ( i > j) r=1;
+			document.getElementById('letter_1').src = i + '.jpg';
+			document.getElementById('letter_2').src = j + '.jpg';
+			
+			document.getElementById('letter_1').classList.remove('rollOut');
+			document.getElementById('letter_2').classList.remove('rollOut'); 
+			
+		}, 600);	
+		
+	}	
+	function left()
+	{
+		document.getElementById('btn').onclick = twist;
+		document.getElementById('letter_1').onclick = null;
+		document.getElementById('letter_2').onclick = null;
+		
+		var go = 0;
+		if ((correct % 10) !== 0) go = 1;
+		
+		if(l) {document.getElementById("result").src = "right.png"
+				correct+=1; 
+				}
+		else {document.getElementById("result").src = "wrong.png";
+				incorrect+=1; 
+				}
+		document.getElementById('result').classList.remove('rollOut');
+		
+		/*--------------------------------------------------------------*/
+		document.getElementById('number_1').classList.add('rollOut');
+		document.getElementById('number_2').classList.add('rollOut');
+		
+		if( correct < 10) n1 = 0;
+		else if( 10 <= correct && correct < 20) n1 = 1;
+		else if( 20 <= correct && correct < 30) n1 = 2;
+		else if( 30 <= correct && correct < 40) n1 = 3;
+		else if( 40 <= correct && correct < 50) n1 = 4;
+		else if( 50 <= correct && correct < 60) n1 = 5;
+		else if( 60 <= correct && correct < 70) n1 = 6;
+		else if( 70 <= correct && correct < 80) n1 = 7;
+		else if( 80 <= correct && correct < 90) n1 = 8;
+		else if( 90 <= correct && correct < 100) n1 = 9;
+		
+		n2 = correct % 10;
+		
+		setTimeout(function() { 
+		
+			document.getElementById('number_1').src = 'numbers/' + n1 + '.png';
+			document.getElementById('number_2').src = 'numbers/' + n2 + '.png';
+			
+			document.getElementById('number_1').classList.remove('rollOut');
+			document.getElementById('number_2').classList.remove('rollOut');
+			
+		}, 600);	
+		
+		/*--------------------------------------------------------------*/
+		document.getElementById('lifes_1').classList.add('rollOut');
+		document.getElementById('lifes_2').classList.add('rollOut');
+		document.getElementById('lifes_3').classList.add('rollOut');
+			
+		setTimeout(function() { 
+			
+			if(incorrect==0)
+			{
+			document.getElementById('lifes_1').style.display = "";
+			document.getElementById('lifes_2').style.display = "";
+			document.getElementById('lifes_3').style.display = "";
+			}
+			else if(incorrect==1)
+			{
+			document.getElementById('lifes_1').style.display = "";
+			document.getElementById('lifes_2').style.display = "";
+			document.getElementById('lifes_3').style.display = "none";
+			}
+			else if(incorrect==2)
+			{
+			document.getElementById('lifes_1').style.display = "";
+			document.getElementById('lifes_2').style.display = "none";
+			document.getElementById('lifes_3').style.display = "none";
+			}
+			else
+			{
+			document.getElementById('lifes_1').style.display = "none";
+			document.getElementById('lifes_2').style.display = "none";
+			document.getElementById('lifes_3').style.display = "none";
+			}
+			
+			document.getElementById('lifes_1').classList.remove('rollOut');
+			document.getElementById('lifes_2').classList.remove('rollOut');
+			document.getElementById('lifes_3').classList.remove('rollOut');
+			
+			
+		}, 600);
+		
+		
+		if (( n1 == 1 && n2 == 0) || ( n1 == 2 && n2 == 0) || ( n1 == 3 && n2 == 0) || ( n1 == 4 && n2 == 0) || ( n1 == 5 && n2 == 0) || ( n1 == 6 && n2 == 0) || ( n1 == 7 && n2 == 0) || ( n1 == 8 && n2 == 0) || ( n1 == 9 && n2 == 0)) 
+		{
+			if( go == 1 )
+			{
+			document.getElementById('congratulations').style.display = "block";
+			document.getElementById('window').style.opacity = .1;
+			document.getElementById('audio_1').src = '';
+			document.getElementById('audio_2').src = 'korobochka.mp3';			
+			}
+		}
+		
+		document.getElementById("message_2").innerHTML = "You've got " + correct + " points.";
+		
+		if ( incorrect >= 3) 
+		{
+			document.getElementById('btn').onclick = null;
+			
+			setTimeout(function() { 
+			
+				document.getElementById('noworries').style.display = "block";
+				document.getElementById('window').style.opacity = .1;
+				document.getElementById('audio_1').src = '';
+				document.getElementById('audio_3').src = 'noworries.mp3';
+			
+			}, 600);
+		
+		}
+		
+		document.getElementById("message_4").innerHTML = "Your score is " + correct + ".";
+	}
+	function right()
+	{	
+		document.getElementById('btn').onclick = twist;
+		document.getElementById('letter_1').onclick = null;
+		document.getElementById('letter_2').onclick = null;
+		
+		var go = 0;
+		if ((correct % 10) !== 0) go = 1;
+
+		if(r) {document.getElementById("result").src = "right.png"
+				correct+=1; 
+				}
+		else {document.getElementById("result").src = "wrong.png";
+				incorrect+=1; 
+				}
+		document.getElementById('result').classList.remove('rollOut');
+		
+		/*--------------------------------------------------------------*/
+		document.getElementById('number_1').classList.add('rollOut');
+		document.getElementById('number_2').classList.add('rollOut');
+		
+		n1 = Math.floor(correct / 10);
+/*		if( correct < 10) n1 = 0;
+		else if( 10 <= correct && correct < 20) n1 = 1;
+		else if( 20 <= correct && correct < 30) n1 = 2;
+		else if( 30 <= correct && correct < 40) n1 = 3;
+		else if( 40 <= correct && correct < 50) n1 = 4;
+		else if( 50 <= correct && correct < 60) n1 = 5;
+		else if( 60 <= correct && correct < 70) n1 = 6;
+		else if( 70 <= correct && correct < 80) n1 = 7;
+		else if( 80 <= correct && correct < 90) n1 = 8;
+		else if( 90 <= correct && correct < 100) n1 = 9;*/
+		
+		n2 = correct % 10;
+		
+		setTimeout(function() { 
+		
+			document.getElementById('number_1').src = 'numbers/' + n1 + '.png';
+			document.getElementById('number_2').src = 'numbers/' + n2 + '.png';
+			
+			document.getElementById('number_1').classList.remove('rollOut');
+			document.getElementById('number_2').classList.remove('rollOut');
+			
+		}, 600);	
+		
+		/*--------------------------------------------------------------*/
+		document.getElementById('lifes_1').classList.add('rollOut');
+		document.getElementById('lifes_2').classList.add('rollOut');
+		document.getElementById('lifes_3').classList.add('rollOut');
+			
+		setTimeout(function() { 
+			
+			if(incorrect==0)
+			{
+			document.getElementById('lifes_1').style.display = "";
+			document.getElementById('lifes_2').style.display = "";
+			document.getElementById('lifes_3').style.display = "";
+			}
+			else if(incorrect==1)
+			{
+			document.getElementById('lifes_1').style.display = "";
+			document.getElementById('lifes_2').style.display = "";
+			document.getElementById('lifes_3').style.display = "none";
+			}
+			else if(incorrect==2)
+			{
+			document.getElementById('lifes_1').style.display = "";
+			document.getElementById('lifes_2').style.display = "none";
+			document.getElementById('lifes_3').style.display = "none";
+			}
+			else
+			{
+			document.getElementById('lifes_1').style.display = "none";
+			document.getElementById('lifes_2').style.display = "none";
+			document.getElementById('lifes_3').style.display = "none";
+			}
+			
+			document.getElementById('lifes_1').classList.remove('rollOut');
+			document.getElementById('lifes_2').classList.remove('rollOut');
+			document.getElementById('lifes_3').classList.remove('rollOut');
+			
+			
+		}, 600);
+		
+		if (( n1 == 1 && n2 == 0) || ( n1 == 2 && n2 == 0) || ( n1 == 3 && n2 == 0) || ( n1 == 4 && n2 == 0) || ( n1 == 5 && n2 == 0) || ( n1 == 6 && n2 == 0) || ( n1 == 7 && n2 == 0) || ( n1 == 8 && n2 == 0) || ( n1 == 9 && n2 == 0)) 
+		{
+			if( go == 1 )
+			{
+			document.getElementById('congratulations').style.display = "block";
+			document.getElementById('window').style.opacity = .1;
+			document.getElementById('audio_1').src = '';
+			document.getElementById('audio_2').src = 'korobochka.mp3';			
+			}
+		}
+		
+		document.getElementById("message_2").innerHTML = "You've got " + correct + " points.";
+		
+		if ( incorrect >= 3) 
+		{
+			document.getElementById('btn').onclick = null;
+			
+			setTimeout(function() { 
+			
+				document.getElementById('noworries').style.display = "block";
+				document.getElementById('window').style.opacity = .1;
+				document.getElementById('audio_1').src = '';
+				document.getElementById('audio_3').src = 'noworries.mp3';
+			
+			}, 600);
+		
+		}
+		
+		document.getElementById("message_4").innerHTML = "Your score is " + correct + ".";
+	}
+	function off()
+	{
+		document.getElementById('sound_off').style.display = "block";
+		document.getElementById('audio_1').src = '';
+	}
+	function on()
+	{
+		document.getElementById('sound_off').style.display = "none";
+		document.getElementById('audio_1').src = 'Kalinka.mp3';
+	}
+	function congratulations()
+	{
+		document.getElementById('congratulations').style.display = "none";
+		document.getElementById('window').style.opacity = 1;
+		document.getElementById('audio_2').src = '';
+		if (getComputedStyle(document.getElementById('sound_off')).display == "none")
+		document.getElementById('audio_1').src = 'Kalinka.mp3';
+	}
+	function noworries()
+	{
+		location.reload();
+	}
+</script>
+<div id="window">
+
+<img id="inscription" src="inscription.png"></img>
+
+
+<img id="lifes_1" class="animated rollIn" src="heart.png" ></img>
+
+
+<img id="lifes_2" class="animated rollIn" src="heart.png" ></img>
+
+
+<img id="lifes_3" class="animated rollIn" src="heart.png" ></img>
+
+
+<img id="sound_on" onclick="off()" src="speaker.png"></img>
+
+
+<img id="sound_off" onclick="on()" src="nospeaker.png"></img>
+
+
+<img id="result" class="animated rollIn" src="" ></img>
+
+
+<a href="#" id="btn" data-icon="↻ " onclick="twist()" class="button pink serif round glass">Twist</a>
+
+
+
+
+<img id="letter_1" onclick="left()" class="animated rollIn" src="" ></img>
+<img id="letter_2" onclick="right()" class="animated rollIn" src="" ></img>
+
+
+<img id="number_1" class="animated rollIn" src="numbers/0.png"></img>
+<img id="number_2" class="animated rollIn" src="numbers/0.png"></img>
+
+
+
+	
+<audio id="audio_1" src="Kalinka.mp3" autoplay="autoplay" loop="loop"></audio>
+<audio id="audio_2" src="" autoplay="autoplay" loop="loop"></audio>
+<audio id="audio_3" src="" autoplay="autoplay" loop="loop"></audio>
+
+</div>
+
+<div id="congratulations">
+<p id="message_1">Congratulations!!!</p>
+<p id="message_2"></p>
+<img id="bear" src="tenor.gif"></img>
+<a href="#"  onclick="congratulations()" class="button pink serif round glass">Continue</a>
+</div>
+
+<div id="noworries">
+<p id="message_3">No worries!!!</p>
+<p id="message_4"></p>
+<img id="ladder" src="noworries.png"></img>
+<a id="tryagain" href="#"  onclick="noworries()" class="button pink serif round glass">Try again</a>
+</div>
+
+</body>
+</html>
+<!--console.log(obj);!-->

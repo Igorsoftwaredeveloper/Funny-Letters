@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Test</title>
+<link href="button.css" rel="stylesheet" type="text/css"/>
+<link href="animate.css" rel="stylesheet" type="text/css"/>
+<style>
+   body {
+    background-image: url(https://storybookstorage.s3.amazonaws.com/items/images/000/102/962/original/CartoonGrassHill01.png?1433120873); /* Путь к фоновому изображению */
+    background-color: #c7b39b; /* Цвет фона */
+	background-size: 100% 660px;
+   background-repeat: no-repeat;
+   }
+   #inscription
+   {
+	position: absolute;
+	left:30%;
+	width:40%;
+	height:100px;
+	text-align: center;
+	animation: fall 1s ease-out 1;	
+   }
+   @keyframes fall
+   {
+	from{
+		transform: translatey(-100px);
+	}
+	to{
+		transform: translatey(0px);
+	}
+	}
+   .lifes
+   {
+	
+	display: inline;
+	
+   }
+	#sound_on
+	{
+		position:absolute;
+		top:1%;
+		right:10px;
+	}
+	#sound_off
+	{
+		position:absolute;
+		top:1%;
+		right:10px;
+	}
+	#btnwrapper
+	{
+		position: relative;
+		top: 170px;
+		text-align: center;
+	}
+	#right
+	{
+		position: relative;
+		top: 150px;
+		text-align: center;
+	}
+	#letter_1
+	{	
+		position: absolute;
+		top: 110px;
+		left: 100px;
+		text-align: center;
+	}
+	#letter_2
+	{	
+		position: absolute;
+		top: 110px;
+		right: 100px;
+		text-align: center;
+	}
+	button 
+	{
+		position:relative;
+		top:300px;
+	}
+	.number_1
+	{	
+		position: absolute;
+		bottom: 1px;
+		left: 600px;
+		text-align: center;
+	}
+	.number_2
+	{	
+		position: absolute;
+		bottom: 1px;
+		right: 600px;
+		text-align: center;
+	}
+	
+  </style>
+</head>
+
+<body>
+
+<script>
+function sleep(ms)
+	{
+		ms += new Date().getTime();
+		while (new Date() < ms){}
+	} 
+function twist()
+	{
+		document.getElementById('letter_1').classList.add('rollOut');
+		document.getElementById('letter_2').classList.add('rollOut');
+		
+		setTimeout(function() { 
+			document.getElementById('picture_1').src = 'В.jpg';
+			document.getElementById('picture_2').src = 'Г.jpg';
+			
+			document.getElementById('letter_1').classList.remove('rollOut');
+			document.getElementById('letter_2').classList.remove('rollOut'); 
+			
+		}, 600);	
+	
+	}
+/*function twistagain()
+	{
+		document.getElementById('letter_1').classList.remove('rollOut');
+		document.getElementById('letter_2').classList.remove('rollOut');		
+
+	}
+*/	
+</script>
+
+
+<div id="inscription">
+<img src="inscription.png"></img>
+</div>
+
+<div class="lifes">
+<img width="100" src="http://img1.liveinternet.ru/images/attach/c/2//64/123/64123602_1272905648_3d_harts.png" ></img>
+</div>
+<div class="lifes">
+<img width="100" src="http://img1.liveinternet.ru/images/attach/c/2//64/123/64123602_1272905648_3d_harts.png" ></img>
+</div>
+<div class="lifes">
+<img width="100" src="http://img1.liveinternet.ru/images/attach/c/2//64/123/64123602_1272905648_3d_harts.png" ></img>
+</div>
+<div id="sound_on">
+<img width="70" src="http://icon-icons.com/icons2/564/PNG/512/Speaker_icon-icons.com_54138.png"></img>
+</div>
+<div id="sound_off">
+<img width="70" src="https://cdn.pixabay.com/photo/2016/12/05/12/28/the-prohibition-of-1883798_960_720.png"></img>
+</div>
+<div id="right">
+<img width="150" src="right.png" ></img>
+</div>
+<div id="btnwrapper">	
+
+<a href="#" data-icon="↻ " onclick="twist()" class="button pink serif round glass">Twist</a>
+	
+</div>
+
+
+<div id="letter_1" class="animated rollIn">
+<img id="picture_1" width="300" src="А.jpg" ></img>
+</div>
+<div id="letter_2" class="animated rollIn">
+<img id="picture_2" width="300" src="Б.jpg" ></img>
+</div>
+
+<div class="number_1 animated">
+<img id="number_1" height="150" width="80" src="numbers/0.png"></img>
+</div>
+
+<div class="number_2 animated">
+<img id="number_2" height="150" width="80" src="numbers/0.png"></img>
+</div>
+
+
+<!--<img id="a" src="https://media.tenor.com/images/00c834fbc54ea40249ef9ea30ea25061/tenor.gif"></img>
+<audio src="korobochka.mp3" autoplay="autoplay" loop="loop"></audio>!-->
+
+	
+
+</body>
+</html>
+<!--console.log(obj);!-->

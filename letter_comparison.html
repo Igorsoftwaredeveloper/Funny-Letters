@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Menu</title>
+<style>
+#letter_r, #letter_l
+{
+	display: inline;
+}	
+</style>
+</head>
+<body>
+<script>
+	var r = 0, l = 0;
+	function randomInteger(min, max) {
+		var rand = min - 0.5 + Math.random() * (max - min + 1)
+		rand = Math.round(rand);
+		return rand;
+	}
+
+	function twist()
+	{
+		document.getElementById("letter_l").innerHTML = "";
+		document.getElementById("letter_r").innerHTML = "";
+		document.getElementById("result").innerHTML = "";
+		/*document.getElementById("content").innerHTML = "whatever";
+		document.getElementById("content").style.backgroundColor = '#000';*/
+		while(i==j)
+		{
+		var i = randomInteger(0, 32);
+		var j = randomInteger(0, 32);
+		}
+		
+		var alphabet = ['А','Б','В','Г','Д','Е','Ё','Ж','З','И','Й','К','Л','М','Н','О','П','Р','С','Т','У','Ф','Х','Ц','Ч','Ш','Щ','Ъ','Ы','Ь','Э','Ю','Я'];
+		l = 0, r = 0;
+		if ( i < j) l=1;
+		if ( i > j) r=1;
+		document.getElementById("letter_l").innerHTML = alphabet[i];
+		document.getElementById("letter_r").innerHTML = alphabet[j];
+		console.log("i: " + i + " j: " + j);
+	}
+	function left()
+	{
+		if(l) document.getElementById("result").innerHTML = "right"
+		else document.getElementById("result").innerHTML = "wrong";
+	}
+	function right()
+	{
+		if(r) document.getElementById("result").innerHTML = "right"
+		else document.getElementById("result").innerHTML = "wrong";
+	}
+	/*if ('d' < 'a') document.write('a');
+	if ('d' > 'a') document.write('d');*/
+	
+	
+	
+</script>
+
+								<button onclick="twist()">Twist</button><br/>
+
+								<div id="letter_l">  </div><div id="letter_r">  </div>
+
+					<button onclick="left()">Left</button> 			<button onclick="right()">Right</button>
+
+											<div id="result">  </div> 
+
+
+
+</body>
+</html>

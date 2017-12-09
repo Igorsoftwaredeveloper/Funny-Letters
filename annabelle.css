@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Annabelle';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Annabelle'), local('Annabelle-Regular'),
+        url(annabelle.woff) format('woff'),
+        url(annabelle.ttf) format('truetype');
+}
