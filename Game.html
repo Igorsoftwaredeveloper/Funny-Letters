@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+  <meta property="og:url"           content="http://funnyletters.at.ua" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="Your Website Title" />
+  <meta property="og:description"   content="Your description" />
+  <meta property="og:image"         content="http://funnyletters.at.ua/picture.jpg" />
+<title>Game</title>
+<link href="button.css" rel="stylesheet" type="text/css"/>
+<link href="animate.css" rel="stylesheet" type="text/css"/>
+<link href="annabelle.css" rel="stylesheet" type="text/css" />
+<style>
+   body 
+   { 
+	overflow: hidden;
+    background-image: url(bg.png); /* Путь к фоновому изображению */
+    background-color: #c7b39b; /* Цвет фона */
+	background-size: 100% 100vh;
+	background-repeat: no-repeat;
+   }
+   #inscription
+   {
+	position: absolute;
+	left:30%;
+	width:40%;
+	animation: fall 1s ease-out 1;	
+   }
+   @keyframes fall
+   {
+	from{
+		transform: translatey(-100px);
+	}
+	to{
+		transform: translatey(0px);
+	}
+	}
+	#lifes_1
+	{
+		position:absolute;
+		left:.6%;
+		top:3%;
+		width:7.6%;
+	}
+	#lifes_2
+	{
+		position:absolute;
+		left:8.5%;
+		top:3%;
+		width:7.6%;
+	}
+	#lifes_3
+	{
+		position:absolute;
+		left:16.4%;
+		top:3%;
+		width:7.6%;
+	}
+	#sound_on
+	{
+		position:absolute;
+		top:1%;
+		right:1%;
+		width:5.13%;
+	}
+	#sound_off
+	{
+		position:absolute;
+		top:1%;
+		right:1%;
+		width:5.13%;
+		display:none;
+	}
+	#btn
+	{
+		font-family: 'Annabelle', arial;
+		color: navy;
+		position: absolute;
+		top: 65%;
+		left: 21%;
+		font-size: 3vw;
+	}
+	#result
+	{
+		position: absolute;
+		top: 34%;
+		left: 44.6%;
+		width: 11.1%;
+	}
+	#letter_1
+	{	
+		position: absolute;
+		top: 16.5%;
+		left: 8%;
+		text-align: center;
+		width:21.98%;
+	}
+	#letter_2
+	{	
+		position: absolute;
+		top: 16.5%;
+		right: 8%;
+		text-align: center;
+		width:21.98%;
+	}
+	#number_1
+	{	
+		position: absolute;
+		bottom: 2%;
+		left: 43.4%;
+		width: 6.4%;
+	}
+	#number_2
+	{	
+		position: absolute;
+		bottom: 2%;
+		right: 43.4%;
+		width: 6.4%;
+	}
+	#congratulations, #noworries
+	{
+		display: none;
+		padding: 0 1%;
+		font-family: 'Annabelle', arial;
+		background-color:#545254;
+		height:650px;
+		width:44%;
+		position:absolute;
+		top:0.8%;
+		left:28%;
+		text-align:center;
+	}
+	#message_1, #message_3
+	{
+		color:#fff;
+		font-size: 5vw;
+		font-weight: 200;
+	}
+	#message_2, #message_4
+	{	
+		position: relative;
+		bottom:10%;
+		color:#fff;
+		font-size: 2.7vw;
+		font-family: 'Annabelle', arial;
+	}
+	#ladder
+	{
+		position:absolute;
+		left: 34%;
+		width: 36%;
+		top: 46%;		
+	}
+	#tryagain
+	{
+		position: relative;
+		top:17vw;
+	}
+	#bear
+	{
+		position:absolute;
+		left: 18%;
+		width: 66%;
+		top: 36%;		
+	}
+	#continue
+	{
+		position: relative;
+		top:17vw;
+	}
+	.fb-share-button
+	{
+		position: absolute;
+		bottom: 0;
+		left: 40%;
+	}
+  </style>
+</head>
+<!--Click on the letter that comes first in the alphabet!-->
+<body onresize="resize()">
+<!--<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.10";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+!-->
+
+
+
+
+<script>
+var r = 0, l = 0, correct = 0, incorrect = 0, n1, n2;
+function randomInteger(min, max) {
+		var rand = min - 0.5 + Math.random() * (max - min + 1)
+		rand = Math.round(rand);
+		return rand;
+	} 
+ 
+function twist()
+	{
+		document.getElementById('btn').onclick = null;
+		document.getElementById('letter_1').onclick = left;
+		document.getElementById('letter_2').onclick = right;
+		
+	
+		document.getElementById('letter_1').classList.add('rollOut');
+		document.getElementById('letter_2').classList.add('rollOut');
+		document.getElementById('result').classList.add('rollOut');
+		
+		setTimeout(function() { 
+			while(i==j)
+			{
+				var i = randomInteger(0, 32);
+				var j = randomInteger(0, 32);
+			}
+			l = 0, r = 0;
+			if ( i < j) l=1;
+			if ( i > j) r=1;
+			document.getElementById('letter_1').src = i + '.jpg';
+			document.getElementById('letter_2').src = j + '.jpg';
+			
+			document.getElementById('letter_1').classList.remove('rollOut');
+			document.getElementById('letter_2').classList.remove('rollOut'); 
+			
+		}, 600);	
+		
+	}
+	
+		setTimeout(function() { 
+		
+			twist();
+			
+		}, 100);	
+		
+	function handler (is_correct)
+	{
+		document.getElementById('btn').onclick = twist;
+		document.getElementById('letter_1').onclick = null;
+		document.getElementById('letter_2').onclick = null;
+		
+		var go = 0;
+		if ((correct % 10) !== 0) go = 1;
+
+		if(is_correct) {document.getElementById("result").src = "right.png"
+				correct+=1; 
+				}
+		else {document.getElementById("result").src = "wrong.png";
+				incorrect+=1; 
+				}
+		document.getElementById('result').classList.remove('rollOut');
+		
+		/*--------------------------------------------------------------*/
+		document.getElementById('number_1').classList.add('rollOut');
+		document.getElementById('number_2').classList.add('rollOut');
+		
+		n1 = Math.floor(correct / 10);		
+		n2 = correct % 10;
+		
+		setTimeout(function() { 
+		
+			document.getElementById('number_1').src = 'numbers/' + n1 + '.png';
+			document.getElementById('number_2').src = 'numbers/' + n2 + '.png';
+			
+			document.getElementById('number_1').classList.remove('rollOut');
+			document.getElementById('number_2').classList.remove('rollOut');
+			
+		}, 600);	
+		
+		/*--------------------------------------------------------------*/
+		document.getElementById('lifes_1').classList.add('rollOut');
+		document.getElementById('lifes_2').classList.add('rollOut');
+		document.getElementById('lifes_3').classList.add('rollOut');
+			
+		setTimeout(function() { 
+			
+			if(incorrect==0)
+			{
+			document.getElementById('lifes_1').style.display = "";
+			document.getElementById('lifes_2').style.display = "";
+			document.getElementById('lifes_3').style.display = "";
+			}
+			else if(incorrect==1)
+			{
+			document.getElementById('lifes_1').style.display = "";
+			document.getElementById('lifes_2').style.display = "";
+			document.getElementById('lifes_3').style.display = "none";
+			}
+			else if(incorrect==2)
+			{
+			document.getElementById('lifes_1').style.display = "";
+			document.getElementById('lifes_2').style.display = "none";
+			document.getElementById('lifes_3').style.display = "none";
+			}
+			else
+			{
+			document.getElementById('lifes_1').style.display = "none";
+			document.getElementById('lifes_2').style.display = "none";
+			document.getElementById('lifes_3').style.display = "none";
+			}
+			
+			document.getElementById('lifes_1').classList.remove('rollOut');
+			document.getElementById('lifes_2').classList.remove('rollOut');
+			document.getElementById('lifes_3').classList.remove('rollOut');
+			
+			
+		}, 600);
+		
+		if (n2 == 0) 
+		{
+			if( go == 1 )
+			{
+			document.getElementById('congratulations').style.display = "block";
+			resize();
+			document.getElementById('window').style.opacity = .1;
+			document.getElementById('audio_1').src = '';
+			document.getElementById('audio_2').src = 'korobochka.mp3';			
+			}
+		}
+		
+		document.getElementById("message_2").innerHTML = "You've got " + correct + " points.";
+		
+		if ( incorrect >= 3) 
+		{
+			document.getElementById('btn').onclick = null;
+			
+			setTimeout(function() { 
+			
+				document.getElementById('noworries').style.display = "block";
+				resize();
+				document.getElementById('window').style.opacity = .1;
+				document.getElementById('audio_1').src = '';
+				document.getElementById('audio_3').src = 'noworries.mp3';
+			
+			}, 600);
+		
+		}
+		
+		document.getElementById("message_4").innerHTML = "Your score is " + correct + ".";
+		
+		setTimeout(function() { 
+		
+		twist();
+			
+		}, 1500);	
+		
+		setTimeout(function() {
+		
+		document.getElementById('btn').classList.add('hinge');	
+		
+		}, 3000);
+		
+	}
+	
+	function left()
+	{
+		handler(l);
+	}
+	
+	function right()
+	{	
+		handler(r);
+	}
+
+	function off()
+	{
+		document.getElementById('sound_off').style.display = "block";
+		document.getElementById('audio_1').src = '';
+	}
+	function on()
+	{
+		document.getElementById('sound_off').style.display = "none";
+		document.getElementById('audio_1').src = 'Kalinka.mp3';
+	}
+	function congratulations()
+	{
+		document.getElementById('congratulations').style.display = "none";
+		document.getElementById('window').style.opacity = 1;
+		document.getElementById('audio_2').src = '';
+		if (getComputedStyle(document.getElementById('sound_off')).display == "none")
+		document.getElementById('audio_1').src = 'Kalinka.mp3';
+	}
+	function noworries()
+	{
+		location.reload();
+	}
+	function resize()
+	{
+		document.getElementById('congratulations').style.height = 1.08 * parseInt(getComputedStyle(document.getElementById('congratulations')).width) + 'px';
+		document.getElementById('noworries').style.height = 1.08 * parseInt(getComputedStyle(document.getElementById('noworries')).width) + 'px';		
+	}
+</script>
+<div id="window">
+
+<img id="inscription" src="inscription.png"></img>
+
+
+<img id="lifes_1" class="animated rollIn" src="heart.png" ></img>
+
+
+<img id="lifes_2" class="animated rollIn" src="heart.png" ></img>
+
+
+<img id="lifes_3" class="animated rollIn" src="heart.png" ></img>
+
+
+<img id="sound_on" onclick="off()" src="speaker.png"></img>
+
+
+<img id="sound_off" onclick="on()" src="nospeaker.png"></img>
+
+
+<img id="result" class="animated rollIn" src="" ></img>
+
+
+<div id="btn" class="animated">Click on the letter that comes first in the alphabet!</div>
+
+
+
+
+<img id="letter_1" onclick="left()" class="animated rollIn" src="" ></img>
+<img id="letter_2" onclick="right()" class="animated rollIn" src="" ></img>
+
+
+<img id="number_1" class="animated rollIn" src="numbers/0.png"></img>
+<img id="number_2" class="animated rollIn" src="numbers/0.png"></img>
+
+
+
+	
+<audio id="audio_1" src="Kalinka.mp3" autoplay="autoplay" loop="loop"></audio>
+<audio id="audio_2" src="" autoplay="autoplay" loop="loop"></audio>
+<audio id="audio_3" src="" autoplay="autoplay" loop="loop"></audio>
+
+</div>
+
+<div id="congratulations">
+<p id="message_1">Congratulations!!!</p>
+<p id="message_2"></p>
+<img id="bear" src="tenor.gif"></img>
+<a id="continue" href="#"  onclick="congratulations()" class="button pink serif round glass">Continue</a>
+<!--<div class="fb-share-button" data-href="http://funnyletters.at.ua" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ffunnyletters.at.ua%2F&amp;src=sdkpreparse">Поделиться</a></div>!-->
+</div>
+
+<div id="noworries">
+<p id="message_3">No worries!!!</p>
+<p id="message_4"></p>
+<img id="ladder" src="noworries.png"></img>
+<a id="tryagain"  href="#"  onclick="noworries()" class="button pink serif round glass">Try again</a>
+<!--<div class="fb-share-button" data-href="http://funnyletters.at.ua" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ffunnyletters.at.ua%2F&amp;src=sdkpreparse">Поделиться</a></div>!-->
+</div>
+
+</body>
+</html>
+<!--console.log(obj);!-->
