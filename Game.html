@@ -277,36 +277,29 @@ function twist()
 			
 		setTimeout(function() { 
 			
-			if(incorrect==0)
+			var MAX_LIVES = 3;
+			var LIVES_DIV_PREFIX = "lifes_";
+
+			function set_div_display(div_name, display_val)
 			{
-			document.getElementById('lifes_1').style.display = "";
-			document.getElementById('lifes_2').style.display = "";
-			document.getElementById('lifes_3').style.display = "";
+				document.getElementById(div_name).style.display = display_val;
 			}
-			else if(incorrect==1)
+
+			function show_lives(n_lives)
 			{
-			document.getElementById('lifes_1').style.display = "";
-			document.getElementById('lifes_2').style.display = "";
-			document.getElementById('lifes_3').style.display = "none";
+				for (var i = 1; i <= MAX_LIVES; i++)
+				{
+					var display_val = (i <= n_lives) ? "" : "none"; // I am using a ternary operator
+					
+					set_div_display(LIVES_DIV_PREFIX + i, display_val);
+				}
 			}
-			else if(incorrect==2)
-			{
-			document.getElementById('lifes_1').style.display = "";
-			document.getElementById('lifes_2').style.display = "none";
-			document.getElementById('lifes_3').style.display = "none";
-			}
-			else
-			{
-			document.getElementById('lifes_1').style.display = "none";
-			document.getElementById('lifes_2').style.display = "none";
-			document.getElementById('lifes_3').style.display = "none";
-			}
-			
+
+			show_lives(MAX_LIVES - incorrect);
 			document.getElementById('lifes_1').classList.remove('rollOut');
 			document.getElementById('lifes_2').classList.remove('rollOut');
 			document.getElementById('lifes_3').classList.remove('rollOut');
-			
-			
+
 		}, 600);
 		
 		if (n2 == 0) 
